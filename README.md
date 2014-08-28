@@ -11,5 +11,5 @@ this. It is intended to be as painless as possible.
 ```
 git clone https://github.com/grepory/workstation-ansible.git
 cd workstation-ansible
-./workstation-osx.sh
+./bootstrap-osx.sh
 ```
