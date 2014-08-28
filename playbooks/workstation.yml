@@ -1,6 +1,27 @@
 ---
 - hosts: workstation
   tasks:
-    - git: repo=git://github.com/grepory/.home.git dest=~/.home update=yes
+    - git: repo=git@github.com:grepory/.home.git dest=~/.home update=yes
     - command: ~/.home/bin/setup-shell
-    - command: ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    - command: brew tap phinze/homebrew-cask
+    - name: Install tools with Homebrew
+      homebrew: name={{ item }} state=latest
+      with_items:
+        - brew-cask
+        - git
+        - rbenv
+        - ruby-build
+        - boot2docker
+        - wget
+    - name: Install homebrew casks
+      homebrew_cask: name={{ item }} state=installed
+      wite_items:
+        - virtualbox
+        - vagrant
+        - spotify
+    - command: ssh-keygen -i ~/.ssh/id_boot2docker -t rsa -b 4096 -N ''
+    - name: Setup boot2docker
+      command: {{ item }}
+      with_items:
+        - boot2docker download
+        - boot2docker init
