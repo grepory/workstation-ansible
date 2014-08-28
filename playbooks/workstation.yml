@@ -3,3 +3,4 @@
   tasks:
     - git: repo=git://github.com/grepory/.home.git dest=~/.home update=yes
     - command: ~/.home/bin/setup-shell
+    - command: ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
